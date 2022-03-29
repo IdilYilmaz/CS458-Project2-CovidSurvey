@@ -21,14 +21,14 @@ public class MainActivity extends AppCompatActivity {
     EditText city;
     EditText sideEffect,sym;
     Button register;
-    RadioButton male,female,x,bio,sin;
+    RadioButton male,female,x,bio,sin,none;
     Button submit;
-    boolean flag;
     private Button selectDate;
     private DatePickerDialog datePickerDialog;
     private TextView dateTxt;
     private Calendar calendar;
     private int year, month, dayOfMonth;
+    boolean flag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         x = (RadioButton) findViewById(R.id.radioButtonX);
         bio = (RadioButton) findViewById(R.id.radioButtonBio);
         sin = (RadioButton) findViewById(R.id.radioButtonSinovac);
+        none = (RadioButton) findViewById(R.id.radioButtonNone);
         sideEffect = (EditText)findViewById(R.id.editTextSideEffect);
         sym = (EditText)findViewById(R.id.editTextSymptoms);
         submit = (Button)findViewById(R.id.buttonRegister);
@@ -58,9 +59,11 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                                 dateTxt.setText("Birthday:"+ day + "/" + (month+1) + "/" + year);
+                                flag = true;
                             }
                         }, year, month, dayOfMonth);
                 datePickerDialog.show();
+
             }
         });
         submit.setOnClickListener(new View.OnClickListener() {
@@ -87,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
                 Toast t2 = Toast.makeText(this, "You must enter last name to submit form!", Toast.LENGTH_SHORT);
                 t2.show();
             }
-            if (isEmpty(sideEffect)) {
-                Toast t3 = Toast.makeText(this, "You must fill the blank!", Toast.LENGTH_SHORT);
-                t3.show();
+            if (isEmpty(city)) {
+                Toast t2 = Toast.makeText(this, "You must enter city to submit form!", Toast.LENGTH_SHORT);
+                t2.show();
             }
 
 
@@ -98,12 +101,18 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Please select Gender", Toast.LENGTH_SHORT).show();
 
             }
-            if (bio.isChecked() || sin.isChecked()) {
+            if (bio.isChecked() || sin.isChecked() || none.isChecked()) {
             } else {
                 Toast.makeText(getApplicationContext(), "Please select Vaccine Type", Toast.LENGTH_SHORT).show();
             }
-            if(!isEmpty(name) && !isEmpty(surName) && !isEmpty(sideEffect) && (male.isChecked() || female.isChecked() || x.isChecked()) && (bio.isChecked() || sin.isChecked())  ){
+            if(!isEmpty(name) && !isEmpty(surName) && !isEmpty(city)&&(male.isChecked() || female.isChecked() || x.isChecked()) && (bio.isChecked() || sin.isChecked()) && (flag) ){
                 Toast.makeText(getApplicationContext(), "Submit Done", Toast.LENGTH_SHORT).show();
+            }
+            if(!flag){
+                Toast t2 = Toast.makeText(this, "Please select Birthday", Toast.LENGTH_SHORT);
+                t2.show();
+            }
+            else{
             }
 
 

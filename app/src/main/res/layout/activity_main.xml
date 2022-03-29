@@ -126,6 +126,12 @@
                 android:layout_height="wrap_content"
                 android:text="Sinovac-CoronaVac" />
 
+            <RadioButton
+                android:id="@+id/radioButtonNone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="None" />
+
         </RadioGroup>
         <EditText
             android:id="@+id/editTextSideEffect"
