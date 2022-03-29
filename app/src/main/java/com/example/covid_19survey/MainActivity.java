@@ -1,6 +1,8 @@
 package com.example.covid_19survey;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -9,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.RadioButton;
+import java.util.Calendar;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     EditText name;
@@ -19,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
     RadioButton male,female,x,bio,sin;
     Button submit;
     boolean flag;
+    private Button selectDate;
+    private DatePickerDialog datePickerDialog;
+    private TextView dateTxt;
+    private Calendar calendar;
+    private int year, month, dayOfMonth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +44,25 @@ public class MainActivity extends AppCompatActivity {
         sideEffect = (EditText)findViewById(R.id.editTextSideEffect);
         sym = (EditText)findViewById(R.id.editTextSymptoms);
         submit = (Button)findViewById(R.id.buttonRegister);
+        selectDate = findViewById(R.id.selectDate);
+        dateTxt = findViewById(R.id.dateTxt);
+        selectDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+                datePickerDialog = new DatePickerDialog(MainActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                                dateTxt.setText("Birthday:"+ day + "/" + (month+1) + "/" + year);
+                            }
+                        }, year, month, dayOfMonth);
+                datePickerDialog.show();
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

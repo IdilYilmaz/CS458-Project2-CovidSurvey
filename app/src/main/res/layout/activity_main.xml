@@ -35,7 +35,27 @@
             android:hint="Surname"
             android:inputType="text" />
 
+        <TextView
+            android:id="@+id/dateTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/selectDate"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:text="Birthday: 00/00/00" />
+
+        <Button
+            android:id="@+id/selectDate"
+            android:layout_margin="10dp"
+            android:layout_centerInParent="true"
+            android:text="Select a date"
+            android:color="#66FF0000"
+            android:alpha="0.25"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <EditText
+
             android:id="@+id/editTextCity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
